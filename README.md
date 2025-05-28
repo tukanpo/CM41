@@ -26,75 +26,77 @@ HitReactionState と DeathState の実装が必要。
 
 ## Blueprint (Common)
 
-#### BPI_Activatable
+### BPI_Activatable
 
 Actor のアクティブ / 非アクティブ 切り替え用インターフェース。  
 実装は Unit / PlayerUnit / EnemyUnit 参照。
 
-#### AC_ActorPool
+### AC_ActorPool
 
 やっつけ ObjectPool。  
 BPI_Activatable とセットで使う。  
 あまりテストしてないので色々足りないかもしれない。
 
-#### AC_CameraAutoFit
+### AC_CameraAutoFit
 
 矩形領域にサイズをあわせるカメラ。  
 あとで Actor の Follow 機能を入れたい。
 
-#### AC_Grid
+### AC_Grid
 
 2Dグリッドを管理する為のただのデータコンテナ。
 
-#### AC_StateMachine & AC_State
+### AC_StateMachine & AC_State
 
 ステートマシンコンポーネント。  
 限界が来たら StateTree に移行したいが、小規模ならこれで良いのでは ぐらいで作ったもの。  
 今後必要なのは中断時（動作中の別ステート割り込み遷移）ロジック。
 
-## Blueprint
+## Blueprint (本体)
 
-#### GM_TestGame
+### GM_TestGame
 
 唯一の GameMode。  
-コンポーネントとしてアタッチしてある GamePhase というステートマシンでゲームの進行制御を行う。
+コンポーネントとしてアタッチしてあるステートマシン (GamePhase) でゲームの進行制御を行う。
 
-#### BP_GameBoard
+### BP_GameBoard
 
-グリッドと Unit の紐づけを行い、各種グリッドへの操作を提供する。  
+グリッドと Unit の紐づけを行い、グリッドへの各種操作を提供する。  
 サイズ変更は DataAsset の GameSettings にて行える。  
 サイズに応じてカメラは自動でサイズ調整される。
 
 Construction Script にて Instanced StaticMesh でセルを生成しているので Editor 上で動的に確認出来る。  
+(詳細タブの GridSize を変更)  
+
 チェッカーカラーの反映は PerInstanceCustomData を使用。
 
-#### BP_Unit
+### BP_Unit
 
 グリッド上に配置可能な Pawn の基底クラス。  
 Unit が実行できるアクション (移動や攻撃等) の提供がメイン。  
 ステートマシンで管理している。  
 
-#### BP_UnitCommand
+### BP_UnitCommand
 
 アクションをコマンドパターン化したもの。  
 アクション自体をオブジェクト化しておくことで実行タイミングをずらしたり同時に実行させたりするのが目的。
 
-#### BP_PlayerUnit / BP_EnemyUnit
+### BP_PlayerUnit / BP_EnemyUnit
 
 BP_Unit から派生した Pawn の実体。
 現状は違うマテリアルを使っていることぐらいしか差異はない。
 
-#### BP_PlayerUnitController
+### BP_PlayerUnitController
 
 PlayerUnit のコントローラ。PlayerController の派生クラス。  
 入力に応じて Command を決定する。
 
-#### BP_EnemyUnitController
+### BP_EnemyUnitController
 
 EnemyUnit のコントローラ。AIController の派生クラス。  
 状況に応じて Command を決定する。
 
-#### BP_EnemyUnitManager
+### BP_EnemyUnitManager
 
 複数の EnemyUnit を管理するためのクラス。
 
