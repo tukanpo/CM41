@@ -4,7 +4,7 @@
 
 基本的な Blueprint のみでどこまでいけるかチャレンジ。
 
-UE 5.5.4
+UE 5.6.0
 
 ![](doc/images/image01.png)
 
