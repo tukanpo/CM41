@@ -63,10 +63,10 @@ BPI_Activatable とセットで使う。
 サイズ変更は DataAsset の GameSettings にて行える。  
 サイズに応じてカメラは自動でサイズ調整される。
 
-Construction Script にて Instanced StaticMesh でセルを生成しているので Editor 上で動的に確認出来る。  
+Construction Script にて **Instanced StaticMesh** でセルを生成しているので Editor 上で動的に確認出来る。  
 (詳細タブの GridSize を変更)  
 
-チェッカーカラーの反映は PerInstanceCustomData を使用。
+チェッカーカラーの反映は **PerInstanceCustomData** を使用。
 
 ### BP_Unit
 
@@ -96,6 +96,6 @@ EnemyUnit のコントローラ。AIController の派生クラス。
 
 ### BP_EnemyUnitManager
 
-複数の EnemyUnit を管理するためのクラス。
-
+複数の EnemyUnit を管理するためのクラス。  
+各 EnemyUnitController から Command を取得し、同時実行する。
 
